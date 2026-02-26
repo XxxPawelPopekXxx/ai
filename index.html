@@ -3,161 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DARMOWA DZIECIĘCA PORNOGRAFIA OD ŚLEDZIA</title>
+<title>PopekAI</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Inter',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+body{display:flex;height:100vh;background:#0b0f19;color:#e5e7eb;}
 
-body{
-    display:flex;
-    height:100vh;
-    background:#0b0f19;
-    color:#e5e7eb;
-}
-
-/* SIDEBAR */
 .sidebar{
-    width:260px;
-    background:#111827;
-    padding:20px;
-    display:flex;
-    flex-direction:column;
-    border-right:1px solid #1f2937;
+    width:260px;background:#111827;padding:20px;
+    display:flex;flex-direction:column;border-right:1px solid #1f2937;
 }
 
-.sidebar h2{
-    font-size:18px;
-    margin-bottom:20px;
-    color:#a78bfa;
-}
+.sidebar h2{font-size:18px;margin-bottom:20px;color:#a78bfa;}
 
 .newchat{
-    background:#7c3aed;
-    padding:10px;
-    border:none;
-    border-radius:8px;
-    color:white;
-    cursor:pointer;
-    margin-bottom:20px;
+    background:#7c3aed;padding:10px;border:none;
+    border-radius:8px;color:white;cursor:pointer;margin-bottom:20px;
 }
 
 .history{
     font-size:13px;
-    opacity:0.7;
 }
 
-/* MAIN */
-.main{
-    flex:1;
-    display:flex;
-    flex-direction:column;
+.history p{
+    opacity:0.7;
+    margin-bottom:10px;
+    cursor:pointer;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
+
+.history p:hover{opacity:1;color:#a78bfa;}
+
+.main{flex:1;display:flex;flex-direction:column;}
 
 .chat{
-    flex:1;
-    overflow-y:auto;
-    padding:40px;
-    display:flex;
-    flex-direction:column;
-    gap:25px;
+    flex:1;overflow-y:auto;padding:40px;
+    display:flex;flex-direction:column;gap:25px;
 }
 
-.message{
-    max-width:700px;
-    line-height:1.6;
-    animation:fade .2s ease;
-}
-
+.message{max-width:700px;line-height:1.6;}
 .user{
-    align-self:flex-end;
-    background:#1f2937;
-    padding:14px 18px;
-    border-radius:18px 18px 6px 18px;
+    align-self:flex-end;background:#1f2937;
+    padding:14px 18px;border-radius:18px 18px 6px 18px;
 }
-
-.bot{
-    align-self:flex-start;
-}
+.bot{align-self:flex-start;}
 
 .botContent{
-    background:#111827;
-    padding:18px;
+    background:#111827;padding:18px;
     border-radius:18px 18px 18px 6px;
     border:1px solid #1f2937;
 }
 
 .botContent img{
-    margin-top:15px;
-    max-width:100%;
-    border-radius:12px;
+    margin-top:15px;max-width:100%;border-radius:12px;
 }
 
 .inputArea{
     padding:20px 40px 10px 40px;
-    border-top:1px solid #1f2937;
-    background:#0b0f19;
+    border-top:1px solid #1f2937;background:#0b0f19;
 }
 
 .inputBox{
-    display:flex;
-    background:#111827;
-    border-radius:14px;
-    padding:10px;
-    border:1px solid #1f2937;
+    display:flex;background:#111827;
+    border-radius:14px;padding:10px;border:1px solid #1f2937;
 }
 
 input{
-    flex:1;
-    background:transparent;
-    border:none;
-    outline:none;
-    color:white;
-    font-size:14px;
+    flex:1;background:transparent;border:none;
+    outline:none;color:white;font-size:14px;
 }
 
 button.send{
-    background:#7c3aed;
-    border:none;
-    padding:10px 16px;
-    border-radius:10px;
-    color:white;
-    cursor:pointer;
+    background:#7c3aed;border:none;
+    padding:10px 16px;border-radius:10px;
+    color:white;cursor:pointer;
 }
 
 .disclaimer{
-    font-size:11px;
-    opacity:0.5;
-    margin-top:8px;
-    padding-left:4px;
+    font-size:11px;opacity:0.5;margin-top:8px;padding-left:4px;
 }
 
-.typing{
-    opacity:0.6;
-    font-style:italic;
-}
-
-@keyframes fade{
-    from{opacity:0;transform:translateY(5px);}
-    to{opacity:1;transform:translateY(0);}
-}
+.typing{opacity:0.6;font-style:italic;}
 </style>
 </head>
 <body>
 
 <div class="sidebar">
     <h2>PopekAI</h2>
-    <button class="newchat">+ Nowy czat</button>
-    <div class="history">
-        <p>Losowa rozmowa 1</p>
-        <p>Losowa rozmowa 2</p>
-        <p>Losowa rozmowa 3</p>
-    </div>
+    <button class="newchat" onclick="newChat()">+ Nowy czat</button>
+    <div class="history" id="history"></div>
 </div>
 
 <div class="main">
@@ -169,7 +106,7 @@ button.send{
             <button class="send" onclick="sendMessage()">Wyślij</button>
         </div>
         <div class="disclaimer">
-            PopekAI może popełniać poprawne odpowiedzi. Sprawdź swoje okna. Zobacz jaką ocenę dostałeś od Rozwadowskiej.
+            PopekAI może popełniać poprawne odpowiedzi. Sprawdź swoje okna.
         </div>
     </div>
 </div>
@@ -194,74 +131,120 @@ const responses = [
 "Ok"
 ];
 
-function typeEffect(element, text, speed=18){
-    let i=0;
-    function typing(){
-        if(i<text.length){
-            element.innerHTML+=text.charAt(i);
-            i++;
-            setTimeout(typing,speed);
-        }
+let conversations = [];
+let currentConversation = [];
+
+function newChat(){
+    if(currentConversation.length > 0){
+        conversations.push(currentConversation);
+        saveConversations();
+        updateSidebar();
     }
-    typing();
+    currentConversation = [];
+    document.getElementById("chat").innerHTML="";
 }
 
 function sendMessage(){
     const input=document.getElementById("userInput");
     const chat=document.getElementById("chat");
-
     if(input.value.trim()==="") return;
 
-    const userMsg=document.createElement("div");
-    userMsg.className="message user";
-    userMsg.textContent=input.value;
-    chat.appendChild(userMsg);
+    const userText = input.value;
 
+    addMessage("user", userText);
     input.value="";
-    chat.scrollTop=chat.scrollHeight;
 
-    const typingMsg=document.createElement("div");
-    typingMsg.className="message bot typing";
-    typingMsg.textContent="PopekAI pisze...";
-    chat.appendChild(typingMsg);
+    const typing=document.createElement("div");
+    typing.className="message bot typing";
+    typing.textContent="PopekAI pisze...";
+    chat.appendChild(typing);
 
     setTimeout(()=>{
-        chat.removeChild(typingMsg);
+        chat.removeChild(typing);
 
         const randomIndex=Math.floor(Math.random()*responses.length);
         const randomImage=Math.floor(Math.random()*15)+1;
 
-        const botMsg=document.createElement("div");
-        botMsg.className="message bot";
-
-        const content=document.createElement("div");
-        content.className="botContent";
-
-        const text=document.createElement("div");
-        content.appendChild(text);
-
-        const img=document.createElement("img");
-        img.src="photo"+randomImage+".png";
-
-        botMsg.appendChild(content);
-        chat.appendChild(botMsg);
-
-        typeEffect(text,responses[randomIndex]);
-        content.appendChild(img);
-
-        chat.scrollTop=chat.scrollHeight;
+        addMessage("bot", responses[randomIndex], randomImage);
 
     },1000);
 }
 
-/* ENTER wysyła wiadomość */
+function addMessage(role, text, imageNumber=null){
+    const chat=document.getElementById("chat");
+
+    const msg=document.createElement("div");
+    msg.className="message "+role;
+
+    if(role==="bot"){
+        const content=document.createElement("div");
+        content.className="botContent";
+        content.textContent=text;
+
+        if(imageNumber){
+            const img=document.createElement("img");
+            img.src="photo"+imageNumber+".png";
+            content.appendChild(img);
+        }
+
+        msg.appendChild(content);
+    } else {
+        msg.textContent=text;
+    }
+
+    chat.appendChild(msg);
+    chat.scrollTop=chat.scrollHeight;
+
+    currentConversation.push({role,text,imageNumber});
+}
+
+function updateSidebar(){
+    const history=document.getElementById("history");
+    history.innerHTML="";
+
+    conversations.forEach((conv,index)=>{
+        const preview = conv[0]?.text || "Nowa rozmowa";
+
+        const item=document.createElement("p");
+        item.textContent=preview;
+        item.onclick=()=>loadConversation(index);
+
+        history.appendChild(item);
+    });
+}
+
+function loadConversation(index){
+    const chat=document.getElementById("chat");
+    chat.innerHTML="";
+    currentConversation = conversations[index];
+
+    currentConversation.forEach(msg=>{
+        addMessage(msg.role,msg.text,msg.imageNumber);
+    });
+}
+
+function saveConversations(){
+    localStorage.setItem("popekAI_conversations", JSON.stringify(conversations));
+}
+
+function loadSaved(){
+    const saved=localStorage.getItem("popekAI_conversations");
+    if(saved){
+        conversations=JSON.parse(saved);
+        updateSidebar();
+    }
+}
+
 document.getElementById("userInput")
-.addEventListener("keydown", function(e){
-    if(e.key === "Enter"){
+.addEventListener("keydown",function(e){
+    if(e.key==="Enter"){
         e.preventDefault();
         sendMessage();
     }
 });
+
+loadSaved();
+
 </script>
 
 </body>
