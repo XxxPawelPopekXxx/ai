@@ -4,214 +4,264 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DARMOWA DZIECIĘCA PORNOGRAFIA OD ŚLEDZIA</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
 }
 
-body {
-    height: 100vh;
-    background: radial-gradient(circle at top left, #1e293b, #0f172a);
-    display: flex;
-    flex-direction: column;
-    color: white;
+body{
+    display:flex;
+    height:100vh;
+    background:#0b0f19;
+    color:#e5e7eb;
 }
 
-header {
-    padding: 20px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 20px;
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    letter-spacing: 1px;
+/* SIDEBAR */
+.sidebar{
+    width:260px;
+    background:#111827;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    border-right:1px solid #1f2937;
 }
 
-#chat {
-    flex: 1;
-    overflow-y: auto;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.sidebar h2{
+    font-size:18px;
+    margin-bottom:20px;
+    color:#a78bfa;
 }
 
-.message {
-    max-width: 70%;
-    padding: 16px 18px;
-    border-radius: 18px;
-    line-height: 1.6;
-    animation: fadeIn 0.3s ease forwards;
+.newchat{
+    background:#7c3aed;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    color:white;
+    cursor:pointer;
+    margin-bottom:20px;
 }
 
-.user {
-    align-self: flex-end;
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
-    border-bottom-right-radius: 6px;
+.history{
+    font-size:13px;
+    opacity:0.7;
 }
 
-.bot {
-    align-self: flex-start;
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-bottom-left-radius: 6px;
+/* MAIN */
+.main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
 }
 
-.bot img {
-    margin-top: 12px;
-    border-radius: 12px;
-    max-width: 100%;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+.chat{
+    flex:1;
+    overflow-y:auto;
+    padding:40px;
+    display:flex;
+    flex-direction:column;
+    gap:25px;
 }
 
-.typing {
-    font-style: italic;
-    opacity: 0.7;
+.message{
+    max-width:700px;
+    line-height:1.6;
+    animation:fade .2s ease;
 }
 
-#inputArea {
-    display: flex;
-    padding: 20px;
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(15px);
-    border-top: 1px solid rgba(255,255,255,0.08);
+.user{
+    align-self:flex-end;
+    background:#1f2937;
+    padding:14px 18px;
+    border-radius:18px 18px 6px 18px;
 }
 
-#userInput {
-    flex: 1;
-    padding: 14px 16px;
-    border-radius: 14px;
-    border: none;
-    background: rgba(255,255,255,0.08);
-    color: white;
-    outline: none;
-    font-size: 14px;
+.bot{
+    align-self:flex-start;
 }
 
-#userInput::placeholder {
-    color: rgba(255,255,255,0.5);
+.botContent{
+    background:#111827;
+    padding:18px;
+    border-radius:18px 18px 18px 6px;
+    border:1px solid #1f2937;
 }
 
-button {
-    margin-left: 12px;
-    padding: 14px 20px;
-    border-radius: 14px;
-    border: none;
-    cursor: pointer;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    color: white;
-    font-weight: 600;
-    transition: 0.2s;
+.botContent img{
+    margin-top:15px;
+    max-width:100%;
+    border-radius:12px;
 }
 
-button:hover {
-    transform: scale(1.05);
+.inputArea{
+    padding:20px 40px 10px 40px;
+    border-top:1px solid #1f2937;
+    background:#0b0f19;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
+.inputBox{
+    display:flex;
+    background:#111827;
+    border-radius:14px;
+    padding:10px;
+    border:1px solid #1f2937;
+}
+
+input{
+    flex:1;
+    background:transparent;
+    border:none;
+    outline:none;
+    color:white;
+    font-size:14px;
+}
+
+button.send{
+    background:#7c3aed;
+    border:none;
+    padding:10px 16px;
+    border-radius:10px;
+    color:white;
+    cursor:pointer;
+}
+
+.disclaimer{
+    font-size:11px;
+    opacity:0.5;
+    margin-top:8px;
+    padding-left:4px;
+}
+
+.typing{
+    opacity:0.6;
+    font-style:italic;
+}
+
+@keyframes fade{
+    from{opacity:0;transform:translateY(5px);}
+    to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
 <body>
 
-<header>POPEK AI</header>
+<div class="sidebar">
+    <h2>PopekAI</h2>
+    <button class="newchat">+ Nowy czat</button>
+    <div class="history">
+        <p>Losowa rozmowa 1</p>
+        <p>Losowa rozmowa 2</p>
+        <p>Losowa rozmowa 3</p>
+    </div>
+</div>
 
-<div id="chat"></div>
+<div class="main">
+    <div class="chat" id="chat"></div>
 
-<div id="inputArea">
-    <input type="text" id="userInput" placeholder="Zadaj pytanie...">
-    <button onclick="sendMessage()">Wyślij</button>
+    <div class="inputArea">
+        <div class="inputBox">
+            <input type="text" id="userInput" placeholder="Napisz wiadomość..." />
+            <button class="send" onclick="sendMessage()">Wyślij</button>
+        </div>
+        <div class="disclaimer">
+            PopekAI może popełniać poprawne odpowiedzi. Sprawdź swoje okna. Zobacz jaką ocenę dostałeś od Rozwadowskiej.
+        </div>
+    </div>
 </div>
 
 <script>
 
 const responses = [
-"To jest premium odpowiedź numer 1.",
-"To jest premium odpowiedź numer 2.",
-"To jest premium odpowiedź numer 3.",
-"To jest premium odpowiedź numer 4.",
-"To jest premium odpowiedź numer 5.",
-"To jest premium odpowiedź numer 6.",
-"To jest premium odpowiedź numer 7.",
-"To jest premium odpowiedź numer 8.",
-"To jest premium odpowiedź numer 9.",
-"To jest premium odpowiedź numer 10.",
-"To jest premium odpowiedź numer 11.",
-"To jest premium odpowiedź numer 12.",
-"To jest premium odpowiedź numer 13.",
-"To jest premium odpowiedź numer 14.",
-"To jest premium odpowiedź numer 15."
+"Jestem popek i robie duże kloce 😊.",
+"Domki w Słupsku, sperma w dupsku",
+"Wujek mnie molestował kiedy miałem lat 6",
+"Auf der Heide blüht ein kleines Blümelein und das heißt Erika",
+"43215 + 84953= 128168🤑",
+"FTG",
+"lubie w dupe❤️",
+"Nie rozumiem cię.",
+"Wal się",
+"Skąd mam wiedzieć",
+"😘😑😯🤤😠🤠🤢💩👾🐗🐄🧠👩‍🦳🤽💅.",
+"Mam tęczowe jąderka🌈",
+"Filip ma raka prostaty",
+"Filip ma raka jąder",
+"ok"
 ];
 
-function typeWriter(element, text, speed = 25) {
-    let i = 0;
-    function typing() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
+function typeEffect(element, text, speed=18){
+    let i=0;
+    function typing(){
+        if(i<text.length){
+            element.innerHTML+=text.charAt(i);
             i++;
-            setTimeout(typing, speed);
+            setTimeout(typing,speed);
         }
     }
     typing();
 }
 
-function sendMessage() {
+function sendMessage(){
+    const input=document.getElementById("userInput");
+    const chat=document.getElementById("chat");
 
-    const input = document.getElementById("userInput");
-    const chat = document.getElementById("chat");
+    if(input.value.trim()==="") return;
 
-    if(input.value.trim() === "") return;
-
-    const userMsg = document.createElement("div");
-    userMsg.className = "message user";
-    userMsg.textContent = input.value;
+    const userMsg=document.createElement("div");
+    userMsg.className="message user";
+    userMsg.textContent=input.value;
     chat.appendChild(userMsg);
 
-    input.value = "";
+    input.value="";
+    chat.scrollTop=chat.scrollHeight;
 
-    const typingMsg = document.createElement("div");
-    typingMsg.className = "message bot typing";
-    typingMsg.textContent = "AI pisze...";
+    const typingMsg=document.createElement("div");
+    typingMsg.className="message bot typing";
+    typingMsg.textContent="PopekAI pisze...";
     chat.appendChild(typingMsg);
 
-    chat.scrollTop = chat.scrollHeight;
-
-    setTimeout(() => {
-
+    setTimeout(()=>{
         chat.removeChild(typingMsg);
 
-        const randomIndex = Math.floor(Math.random() * responses.length);
-        const randomImageNumber = Math.floor(Math.random() * 15) + 1;
+        const randomIndex=Math.floor(Math.random()*responses.length);
+        const randomImage=Math.floor(Math.random()*15)+1;
 
-        const botMsg = document.createElement("div");
-        botMsg.className = "message bot";
+        const botMsg=document.createElement("div");
+        botMsg.className="message bot";
 
-        const text = document.createElement("div");
-        botMsg.appendChild(text);
+        const content=document.createElement("div");
+        content.className="botContent";
 
-        const image = document.createElement("img");
-        image.src = "photo" + randomImageNumber + ".png";
+        const text=document.createElement("div");
+        content.appendChild(text);
 
+        const img=document.createElement("img");
+        img.src="photo"+randomImage+".png";
+
+        botMsg.appendChild(content);
         chat.appendChild(botMsg);
 
-        typeWriter(text, responses[randomIndex], 20);
-        botMsg.appendChild(image);
+        typeEffect(text,responses[randomIndex]);
+        content.appendChild(img);
 
-        chat.scrollTop = chat.scrollHeight;
+        chat.scrollTop=chat.scrollHeight;
 
-    }, 1200);
+    },1000);
 }
 
+/* ENTER wysyła wiadomość */
+document.getElementById("userInput")
+.addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+        e.preventDefault();
+        sendMessage();
+    }
+});
 </script>
 
 </body>
