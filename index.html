@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DARMOWA DZIECIĘCA PORNOGRAFIA OD ŚLEDZIA</title>
+<title>PopekAI</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
@@ -16,16 +16,10 @@ body{display:flex;height:100vh;background:#0b0f19;color:#e5e7eb;}
     display:flex;flex-direction:column;border-right:1px solid #1f2937;
 }
 .sidebar h2{font-size:18px;margin-bottom:20px;color:#a78bfa;}
-.newchat{
+.newchat, .clearHistory{
     background:#7c3aed;padding:10px;border:none;
-    border-radius:8px;color:white;cursor:pointer;margin-bottom:20px;
+    border-radius:8px;color:white;cursor:pointer;margin-bottom:10px;
 }
-.history{font-size:13px;}
-.history p{
-    opacity:0.7;margin-bottom:10px;cursor:pointer;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.history p:hover{opacity:1;color:#a78bfa;}
 
 /* MAIN */
 .main{flex:1;display:flex;flex-direction:column;}
@@ -77,7 +71,7 @@ button.send{
 <div class="sidebar">
     <h2>PopekAI</h2>
     <button class="newchat" onclick="newChat()">+ Nowy czat</button>
-    <div class="history" id="history"></div>
+    <button class="clearHistory" onclick="clearHistory()">Usuń historię czatu</button>
 </div>
 
 <div class="main">
@@ -95,7 +89,6 @@ button.send{
 </div>
 
 <script>
-
 const responses = [
 "Jestem popek i robie duże kloce 😊.",
 "Domki w Słupsku, sperma w dupsku",
@@ -114,25 +107,26 @@ const responses = [
 "Ok"
 ];
 
-let conversations = [];
 let currentConversation = [];
 
-// Wczytaj zapisane rozmowy z localStorage
+// Wczytaj zapisane wiadomości przy starcie
 function loadSaved(){
-    const saved=localStorage.getItem("popekAI_conversations");
+    const saved=localStorage.getItem("popekAI_currentConversation");
     if(saved){
-        conversations=JSON.parse(saved);
-        updateSidebar();
+        currentConversation = JSON.parse(saved);
+        currentConversation.forEach(msg=>{
+            addMessage(msg.role, msg.text, msg.imageNumber, false);
+        });
     }
 }
 
-// Zapisz rozmowy w localStorage
-function saveConversations(){
-    localStorage.setItem("popekAI_conversations", JSON.stringify(conversations));
+// Zapisz wiadomości w localStorage
+function saveConversation(){
+    localStorage.setItem("popekAI_currentConversation", JSON.stringify(currentConversation));
 }
 
-// Dodaj wiadomość do chat + currentConversation
-function addMessage(role, text, imageNumber=null){
+// Dodaj wiadomość do czatu
+function addMessage(role, text, imageNumber=null, save=true){
     const chat=document.getElementById("chat");
     const msg=document.createElement("div");
     msg.className="message "+role;
@@ -156,7 +150,10 @@ function addMessage(role, text, imageNumber=null){
     chat.appendChild(msg);
     chat.scrollTop=chat.scrollHeight;
 
-    currentConversation.push({role,text,imageNumber});
+    if(save){
+        currentConversation.push({role,text,imageNumber});
+        saveConversation();
+    }
 }
 
 // Wyslij wiadomość użytkownika
@@ -184,40 +181,18 @@ function sendMessage(){
     },1000);
 }
 
-// Nowy czat — tylko jeśli jest coś do zapisania
+// Nowy czat – czyści bieżącą rozmowę
 function newChat(){
-    if(currentConversation.length > 0){
-        conversations.push([...currentConversation]); // kopiujemy aby nie referencja
-        saveConversations();
-        updateSidebar();
-    }
     currentConversation = [];
     document.getElementById("chat").innerHTML="";
+    saveConversation();
 }
 
-// Aktualizuj sidebar
-function updateSidebar(){
-    const history=document.getElementById("history");
-    history.innerHTML="";
-
-    conversations.forEach((conv,index)=>{
-        const preview = conv[0]?.text || "Nowa rozmowa";
-        const item=document.createElement("p");
-        item.textContent=preview;
-        item.onclick=()=>loadConversation(index);
-        history.appendChild(item);
-    });
-}
-
-// Wczytaj wybraną rozmowę
-function loadConversation(index){
-    const chat=document.getElementById("chat");
-    chat.innerHTML="";
-    currentConversation = [...conversations[index]]; // kopiujemy aby nie referencja
-
-    currentConversation.forEach(msg=>{
-        addMessage(msg.role,msg.text,msg.imageNumber);
-    });
+// Usuń historię czatu
+function clearHistory(){
+    currentConversation = [];
+    document.getElementById("chat").innerHTML="";
+    localStorage.removeItem("popekAI_currentConversation");
 }
 
 // Enter wysyła wiadomość
@@ -229,6 +204,7 @@ document.getElementById("userInput")
     }
 });
 
+// Wczytaj przy starcie
 loadSaved();
 
 </script>
