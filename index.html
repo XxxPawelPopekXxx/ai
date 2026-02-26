@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My AI Chat</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0f172a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    background-color: #111827;
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #1f2937;
+}
+
+#chat {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 20px;
+    max-width: 70%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    line-height: 1.5;
+}
+
+.user {
+    background-color: #2563eb;
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.bot {
+    background-color: #1f2937;
+    align-self: flex-start;
+}
+
+.bot img {
+    margin-top: 10px;
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+#inputArea {
+    display: flex;
+    padding: 15px;
+    background-color: #111827;
+    border-top: 1px solid #1f2937;
+}
+
+#userInput {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    background-color: #2563eb;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1d4ed8;
+}
+</style>
+</head>
+<body>
+
+<header>My AI Chat</header>
+
+<div id="chat"></div>
+
+<div id="inputArea">
+    <input type="text" id="userInput" placeholder="Wpisz pytanie...">
+    <button onclick="sendMessage()">Wyślij</button>
+</div>
+
+<script>
+
+const responses = [
+"To jest przykładowa odpowiedź numer 1.",
+"To jest przykładowa odpowiedź numer 2.",
+"To jest przykładowa odpowiedź numer 3.",
+"To jest przykładowa odpowiedź numer 4.",
+"To jest przykładowa odpowiedź numer 5.",
+"To jest przykładowa odpowiedź numer 6.",
+"To jest przykładowa odpowiedź numer 7.",
+"To jest przykładowa odpowiedź numer 8.",
+"To jest przykładowa odpowiedź numer 9.",
+"To jest przykładowa odpowiedź numer 10.",
+"To jest przykładowa odpowiedź numer 11.",
+"To jest przykładowa odpowiedź numer 12.",
+"To jest przykładowa odpowiedź numer 13.",
+"To jest przykładowa odpowiedź numer 14.",
+"To jest przykładowa odpowiedź numer 15."
+];
+
+function sendMessage() {
+
+    const input = document.getElementById("userInput");
+    const chat = document.getElementById("chat");
+
+    if(input.value.trim() === "") return;
+
+    // Wiadomość użytkownika
+    const userMsg = document.createElement("div");
+    userMsg.className = "message user";
+    userMsg.textContent = input.value;
+    chat.appendChild(userMsg);
+
+    // RNG odpowiedź
+    const randomIndex = Math.floor(Math.random() * responses.length);
+    const randomImageNumber = Math.floor(Math.random() * 15) + 1;
+
+    const botMsg = document.createElement("div");
+    botMsg.className = "message bot";
+
+    const text = document.createElement("div");
+    text.textContent = responses[randomIndex];
+
+    const image = document.createElement("img");
+    image.src = "photo" + randomImageNumber + ".png";
+
+    botMsg.appendChild(text);
+    botMsg.appendChild(image);
+
+    chat.appendChild(botMsg);
+
+    chat.scrollTop = chat.scrollHeight;
+    input.value = "";
+}
+
+</script>
+
+</body>
+</html>
